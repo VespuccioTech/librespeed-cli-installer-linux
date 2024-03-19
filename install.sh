@@ -3,25 +3,14 @@
 # Version number of the speedtest-cli package
 version=1.0.10
 
-# Ask the user to input 1 or 2 to specify their CPU architecture
-echo "Select your CPU architecture:"
-echo "1. amd64"
-echo "2. arm64"
-read -p "Choice: " choice
-
-# Check the user's choice and assign the corresponding value to the "architecture" variable
-case $choice in
-    1)
-        architecture="amd64"
-        ;;
-    2)
-        architecture="arm64"
-        ;;
-    *)
-        echo "Invalid choice. Please input 1 or 2."
-        exit 1
-        ;;
-esac
+# Check system architecture
+if [ "$(arch)" = "x86_64" ]; then
+    architecture="amd64"
+elif [ "$(arch)" = "aarch64" ]; then
+    architecture="arm64"
+else
+    exit 1
+fi
 
 # Download the speedtest-cli package
 wget "https://github.com/librespeed/speedtest-cli/releases/download/v${version}/librespeed-cli_${version}_linux_${architecture}.tar.gz"
