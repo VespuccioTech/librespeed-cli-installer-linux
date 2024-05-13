@@ -4,9 +4,9 @@
 version=1.0.10
 
 # Check system architecture
-if [ "$(arch)" = "x86_64" ]; then
+if [ "$(uname -m)" = "x86_64" ]; then
     architecture="amd64"
-elif [ "$(arch)" = "aarch64" ]; then
+elif [ "$(uname -m)" = "aarch64" ]; then
     architecture="arm64"
 else
     exit 1
